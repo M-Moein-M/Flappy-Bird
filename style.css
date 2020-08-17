@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+}
+
+.game-frame {
+    position: relative;
+
+    width: 600px;
+    height: 400px;
+
+    background-color: #bddcf0;
+
+    border: 1px black solid;
+    border-radius: 2px;
+}
+
+#bird-img {
+    position: absolute;
+    width: 50px;
+    height: 40px;
+    left: 30px;
+    top: 120px;
+}
