@@ -6,15 +6,27 @@ function gameInit() {
     let gameFrameDiv = document.getElementById('game-frame');
 
     let currentObstacleID = 0; // after creating new obstacle we set the id equal to this number and increase the value by 1
-                                // 0top for the top obstacle, 0bottom for the bottom obstacle
+    // 0top for the top obstacle, 0bottom for the bottom obstacle
 
     let createObstacleInterval;
+    let moveObstacleInterval;
+
+    let obstacleMoveDelay = 20;
 
     function initialize() {
         createObstacleInterval = setInterval(createObstacle, 2000);
+        moveObstacleInterval = setInterval(moveObstacle, obstacleMoveDelay);
 
-        // moveObstacle; // moves all of the obstacles
         movement();
+    }
+
+    function moveObstacle() {// moves all of the obstacles
+        const obstacleSpeed = -2;
+        let allObstacles = gameFrameDiv.children;
+        for (let obs of allObstacles) {
+            if (obs.classList.contains('obstacle'))
+                setElementPosition(obs, 'left', getElementPosition(obs, 'left') + obstacleSpeed);
+        }
     }
 
     function createObstacle() {  // creates a single obstacle
