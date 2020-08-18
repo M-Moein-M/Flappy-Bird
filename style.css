@@ -36,8 +36,14 @@ body {
     width: 16%;
     height: 60px;
     font-size: 20px;
-    background-color: #7070ff;
+    background-color: #fc5151;
     position: absolute;
     left: 42%;
     top: 30%;
+}
+
+.obstacle{
+    position: absolute;
+    border: 1px #747474 solid;
+    border-radius: 2px;
 }

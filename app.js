@@ -6,9 +6,49 @@ function gameInit() {
     let gameFrameDiv = document.getElementById('game-frame');
 
     function initialize() {
-
-
+        createObstacle(); // creates a single obstacle
+        // moveObstacle; // moves all of the obstacles
         movement();
+    }
+
+    function createObstacle() {
+
+        let gameFrameWidth = gameFrameDiv.offsetWidth;
+
+        let newObstacleTop = document.createElement('div');
+        let newObstacleBottom = document.createElement('div');
+
+        setInitialAttributes(newObstacleTop);
+        setInitialAttributes(newObstacleBottom);
+
+        setElementPosition(newObstacleTop, 'top', 0);
+        setElementPosition(newObstacleBottom, 'bottom', 0);
+
+        setInitialHeight(newObstacleTop, newObstacleBottom);
+
+        let randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        newObstacleTop.style.backgroundColor = randomColor;
+        newObstacleBottom.style.backgroundColor = randomColor;
+
+        gameFrameDiv.appendChild(newObstacleTop);
+        gameFrameDiv.appendChild(newObstacleBottom);
+
+        function setInitialAttributes(element) {
+            const obstacleWidth = 8;
+
+            element.classList.add('obstacle');
+            element.style.width = obstacleWidth + 'px';  // set the width of obstacle
+            setElementPosition(element, 'left', gameFrameWidth);  // send it all the way to the right fo gameFrame
+        }
+
+        function setInitialHeight(obstacleTop, obstacleBottom) {
+            const obstacleMargin = 200; // indicates the amount of space that FlappyBird can fly through
+            const obstacleBottomHeight = Math.floor(Math.random() * (gameFrameDiv.offsetHeight - 200)) + 100; // a random number between 100 and gameFrameHeight-200
+            obstacleBottom.style.height = obstacleBottomHeight + 'px';
+            obstacleTop.style.height = gameFrameDiv.offsetHeight - obstacleMargin - obstacleBottomHeight + 60 + 'px';  // set the value of top obstacle, 20 is added so that topObstacle be visible
+        }
+
+
     }
 
     function movement() {
@@ -19,7 +59,7 @@ function gameInit() {
         let movementDelay = 20;
 
         let birdImage = document.getElementById('bird-img');
-        birdImage.style.bottom = (Math.floor(2*gameFrameDiv.offsetHeight / 3)).toString() + 'px';
+        birdImage.style.bottom = (Math.floor(2 * gameFrameDiv.offsetHeight / 3)).toString() + 'px';
         console.log('bottom:' + getElementPosition(birdImage, 'bottom'));
 
         movementInterval = setInterval(function () {
@@ -42,8 +82,8 @@ function gameInit() {
                 element.style.left = value.toString() + 'px';
                 return;
             case 'right':
-                element.style.right = value.toString()+'px';
-                return ;
+                element.style.right = value.toString() + 'px';
+                return;
         }
     }
 
@@ -61,7 +101,7 @@ function gameInit() {
     }
 
     window.addEventListener('keydown', function (event) {
-        if (event.code ==='ArrowUp'){
+        if (event.code === 'ArrowUp') {
             currentBirdVelocityY = birdInitialVelocityY;
         }
     })
