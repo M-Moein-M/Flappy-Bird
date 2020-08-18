@@ -8,13 +8,16 @@ function gameInit() {
     let currentObstacleID = 0; // after creating new obstacle we set the id equal to this number and increase the value by 1
                                 // 0top for the top obstacle, 0bottom for the bottom obstacle
 
+    let createObstacleInterval;
+
     function initialize() {
-        createObstacle(); // creates a single obstacle
+        createObstacleInterval = setInterval(createObstacle, 2000);
+
         // moveObstacle; // moves all of the obstacles
         movement();
     }
 
-    function createObstacle() {
+    function createObstacle() {  // creates a single obstacle
         currentObstacleID += 1;
         let gameFrameWidth = gameFrameDiv.offsetWidth;
 
@@ -53,7 +56,6 @@ function gameInit() {
             obstacleBottom.style.height = obstacleBottomHeight + 'px';
             obstacleTop.style.height = gameFrameDiv.offsetHeight - obstacleMargin - obstacleBottomHeight + 'px';  // set the value of top obstacle, 20 is added so that topObstacle be visible
         }
-
 
     }
 
