@@ -21,7 +21,7 @@ function gameInit() {
     }
 
     function moveObstacle() {// moves all of the obstacles
-        const obstacleSpeed = -2;
+        const obstacleSpeed = -3;
         let allObstacles = gameFrameDiv.children;
         for (let obs of allObstacles) {
             if (obs.classList.contains('obstacle')) {
@@ -32,7 +32,7 @@ function gameInit() {
     }
 
     function removeOutOFGameFrameObstacle(obstacle){  // removes the obstacle if it reaches the left side of the gameFrame
-        if (getElementPosition(obstacle, 'left') === 0)
+        if (getElementPosition(obstacle, 'left') < 0)
             obstacle.remove();
     }
 
