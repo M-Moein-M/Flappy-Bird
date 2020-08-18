@@ -66,6 +66,7 @@ function gameInit() {
 
     }
 
+    // stops the game
     function clearAllIntervals() {
         clearInterval(moveObstacleInterval);
         clearInterval(createObstacleInterval);
