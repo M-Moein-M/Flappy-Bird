@@ -5,6 +5,9 @@ function gameInit() {
     let currentBirdVelocityY;
     let gameFrameDiv = document.getElementById('game-frame');
 
+    let currentObstacleID = 0; // after creating new obstacle we set the id equal to this number and increase the value by 1
+                                // 0top for the top obstacle, 0bottom for the bottom obstacle
+
     function initialize() {
         createObstacle(); // creates a single obstacle
         // moveObstacle; // moves all of the obstacles
@@ -12,11 +15,14 @@ function gameInit() {
     }
 
     function createObstacle() {
-
+        currentObstacleID += 1;
         let gameFrameWidth = gameFrameDiv.offsetWidth;
 
         let newObstacleTop = document.createElement('div');
         let newObstacleBottom = document.createElement('div');
+
+        newObstacleTop.id = currentObstacleID + 'top';
+        newObstacleBottom.id = currentObstacleID + 'bottom';
 
         setInitialAttributes(newObstacleTop);
         setInitialAttributes(newObstacleBottom);
@@ -43,9 +49,9 @@ function gameInit() {
 
         function setInitialHeight(obstacleTop, obstacleBottom) {
             const obstacleMargin = 200; // indicates the amount of space that FlappyBird can fly through
-            const obstacleBottomHeight = Math.floor(Math.random() * (gameFrameDiv.offsetHeight - 200)) + 100; // a random number between 100 and gameFrameHeight-200
+            const obstacleBottomHeight = Math.floor(Math.random() * (gameFrameDiv.offsetHeight - obstacleMargin)); // a random number between 0 and Height-margin
             obstacleBottom.style.height = obstacleBottomHeight + 'px';
-            obstacleTop.style.height = gameFrameDiv.offsetHeight - obstacleMargin - obstacleBottomHeight + 60 + 'px';  // set the value of top obstacle, 20 is added so that topObstacle be visible
+            obstacleTop.style.height = gameFrameDiv.offsetHeight - obstacleMargin - obstacleBottomHeight + 'px';  // set the value of top obstacle, 20 is added so that topObstacle be visible
         }
 
 
