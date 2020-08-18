@@ -24,9 +24,16 @@ function gameInit() {
         const obstacleSpeed = -2;
         let allObstacles = gameFrameDiv.children;
         for (let obs of allObstacles) {
-            if (obs.classList.contains('obstacle'))
+            if (obs.classList.contains('obstacle')) {
                 setElementPosition(obs, 'left', getElementPosition(obs, 'left') + obstacleSpeed);
+                removeOutOFGameFrameObstacle(obs);
+            }
         }
+    }
+
+    function removeOutOFGameFrameObstacle(obstacle){  // removes the obstacle if it reaches the left side of the gameFrame
+        if (getElementPosition(obstacle, 'left') === 0)
+            obstacle.remove();
     }
 
     function createObstacle() {  // creates a single obstacle
