@@ -1,5 +1,5 @@
 function gameInit() {
-    let playerScore = 0;
+    let playerScore = 160;
     let movementInterval;
     let birdInitialVelocityY;
     let gravityAcceleration;
@@ -20,6 +20,7 @@ function gameInit() {
         moveObstacleInterval = setInterval(moveObstacle, obstacleMoveDelay);
 
         movement();
+        updateHighScore();
     }
 
     function moveObstacle() {// moves all of the obstacles
@@ -34,12 +35,26 @@ function gameInit() {
         }
     }
 
+    function updateHighScore(){
+        let highScore = 0;
+        if (localStorage.getItem('highScore')){
+            highScore = Number(localStorage.getItem('highScore'));
+            document.getElementById('high-score').innerText = (Math.floor(highScore/obstacleWidth)).toString();
+            if (highScore <= playerScore){
+                localStorage.setItem('highScore', playerScore.toString());
+            }
+        }else{
+            localStorage.setItem('highScore', '0');
+        }
+    }
+
     function updateScore(obs) {
         if (getElementPosition(obs, 'left') + obstacleWidth <
             getElementPosition(document.getElementById('bird-img'), 'left')) {
             if (obs.id.includes('top')){  // increase the score only for one of the obstacles
                 playerScore++;
                 document.getElementById('score').innerText = (Math.floor(playerScore/obstacleWidth)).toString();
+                updateHighScore();
             }
         }
     }
@@ -193,6 +208,7 @@ function gameInit() {
     document.getElementById('start-game-btn').addEventListener('click', function () {
         this.classList.add('hide');
         document.getElementById('bird-img').classList.remove('hide');
+        document.getElementById('score-board').classList.remove('hide');
         initialize();
     });
 
