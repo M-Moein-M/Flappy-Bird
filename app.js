@@ -1,5 +1,5 @@
 function gameInit() {
-    let playerScore = 160;
+    let playerScore = 0;
     let movementInterval;
     let birdInitialVelocityY;
     let gravityAcceleration;
