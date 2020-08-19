@@ -46,3 +46,7 @@ body {
     border: 1px #747474 solid;
     border-radius: 2px;
 }
+
+.score-board{
+    margin-right: 100px;
+}

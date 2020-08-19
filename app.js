@@ -1,4 +1,5 @@
 function gameInit() {
+    let playerScore = 0;
     let movementInterval;
     let birdInitialVelocityY;
     let gravityAcceleration;
@@ -28,6 +29,17 @@ function gameInit() {
             if (obs.classList.contains('obstacle')) {
                 setElementPosition(obs, 'left', getElementPosition(obs, 'left') + obstacleSpeed);
                 removeOutOFGameFrameObstacle(obs);
+                updateScore(obs);
+            }
+        }
+    }
+
+    function updateScore(obs) {
+        if (getElementPosition(obs, 'left') + obstacleWidth <
+            getElementPosition(document.getElementById('bird-img'), 'left')) {
+            if (obs.id.includes('top')){  // increase the score only for one of the obstacles
+                playerScore++;
+                document.getElementById('score').innerText = (Math.floor(playerScore/obstacleWidth)).toString();
             }
         }
     }
